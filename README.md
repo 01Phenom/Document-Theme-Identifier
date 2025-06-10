@@ -1,8 +1,10 @@
-# Document Research & Theme Identification System
+# 📄 Document Research & Theme Identification System
 
 This project is a document research and theme identification system that allows users to upload PDF documents, query their content, and discover thematic connections across documents. The system uses AI to extract information from documents and identify common themes.
 
-## Features
+---
+
+## 🚀 Features
 
 - **Document Upload**: Upload and process PDF documents
 - **Document Management**: View, filter, and delete documents
@@ -10,30 +12,36 @@ This project is a document research and theme identification system that allows 
 - **Theme Identification**: Automatically identify themes across documents
 - **Direct Answers**: Get concise answers to specific questions
 
-## Project Structure
+---
+
+## 🏗 Project Structure
 
 - **Backend**: FastAPI application with modular services
 - **Frontend**: Streamlit web interface
 - **Vector Database**: ChromaDB for document embeddings and semantic search
 - **LLM Integration**: Google Generative AI for text processing and theme identification
 
-## Prerequisites
+---
+
+## ⚙️ Prerequisites
 
 - Python 3.8+
 - Google API Key for Generative AI services
 
-## Installation
+---
+
+## 🧪 Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Moaksh/wasserstoff-AiInternTask
+   git clone https://github.com/01Phenom/Document-Theme-Identifier.git
    cd wasserstoff-AiInternTask
    ```
 
-2. Create and activate a Conda environment (optional but recommended):
+2. Create and activate a virtual environment:
    ```bash
-   conda create -n wasserstoff python=3.8
-   conda activate wasserstoff
+   python -m venv wasserstoff
+   .\wasserstoff\Scripts\activate
    ```
 
 3. Install dependencies:
@@ -41,95 +49,124 @@ This project is a document research and theme identification system that allows 
    pip install -r requirements.txt
    ```
 
-3. Set up environment variables:
-   - Create a `.env` file in the root directory
-   - Add your Google API key: `GOOGLE_API_KEY=your_api_key_here`
+4. Set up environment variables:
+   - Create a `.env` file in the root directory and add:
+     ```
+     GOOGLE_API_KEY=your_api_key_here
+     ```
+   - Or temporarily in PowerShell:
+     ```bash
+     $env:GOOGLE_API_KEY="YOUR_KEY_HERE"
+     ```
 
-## Running the Application
+---
 
-### Backend
+## ▶️ Running the Application
 
-1. Start the FastAPI backend:
-   ```bash
-   cd backend
-   uvicorn app.main:app --reload
-   ```
-   The API will be available at http://localhost:8000
-   - API documentation: http://localhost:8000/docs
+### 🔧 Backend
 
-### Frontend
+Start the FastAPI backend:
+```bash
+cd backend
+uvicorn app.main:app --reload
+```
+- API Base URL: [http://localhost:8000](http://localhost:8000)
+- Swagger Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-1. Start the Streamlit frontend:
-   ```bash
-   cd demo
-   streamlit run app.py
-   ```
-   The web interface will be available at http://localhost:8501
+### 🎛 Frontend
 
-**Note on Hosting:** Due to the system storing uploaded PDF documents, hosting on free-tier services is not feasible. Local deployment is recommended.
+Launch the Streamlit interface:
+```bash
+cd demo
+streamlit run app.py
+```
+- App UI: [http://localhost:8501](http://localhost:8501)
 
+> 💡 **Note**: Hosting is best done locally or on paid cloud platforms due to file storage requirements.
 
-## Usage
+---
 
-1. Open the Streamlit interface in your browser
-2. Upload PDF documents using the sidebar
-3. Wait for documents to be processed (status will change to "ready")
-4. Enter questions in the query box
-5. View direct answers, identified themes, and source documents
+## 🧠 Usage Guide
 
-## Solution Approach
+1. Open [http://localhost:8501](http://localhost:8501) in your browser.
+2. Upload PDF files via the sidebar.
+3. Wait for processing to complete.
+4. Ask natural language questions.
+5. View direct answers, identified themes, and their sources.
 
-### Document Processing Pipeline
+---
 
-1. **Document Upload**: PDFs are uploaded and stored locally
-2. **Text Extraction**: Text is extracted from PDFs using pdfplumber
-3. **Chunking**: Documents are split into manageable chunks with overlap
-4. **Embedding**: Text chunks are embedded using Google's embedding model
-5. **Vector Storage**: Embeddings are stored in ChromaDB for semantic search
+## 🔍 Solution Approach
 
-### Query Processing Pipeline
+### 📘 Document Processing Pipeline
 
-1. **Query Embedding**: User queries are embedded using the same model
-2. **Semantic Search**: ChromaDB finds relevant document chunks
-3. **Context Building**: Relevant chunks are assembled into context
-4. **LLM Processing**: Google's Generative AI processes the context to:
-   - Generate direct answers to user queries
-   - Identify themes across documents
-   - Provide source citations
+1. **Upload** → PDFs are stored locally
+2. **Text Extraction** → `pdfplumber` extracts content
+3. **Chunking** → Documents are split with overlap
+4. **Embedding** → Google Embedding model used
+5. **Vector Storage** → Stored in ChromaDB
 
-### Theme Identification
+### ❓ Query Processing Pipeline
 
-The theme identification system works by:
+1. **Query Embedding** → Embedded with the same model
+2. **Semantic Search** → ChromaDB returns top matches
+3. **Context Building** → Relevant chunks assembled
+4. **LLM Processing** → Google GenAI generates:
+   - Direct answers
+   - Common themes
+   - Source references
 
-1. Analyzing semantic relationships between document chunks
-2. Using prompt engineering to guide the LLM in identifying themes
-3. Parsing structured theme data from LLM responses
-4. Organizing themes with supporting document references
+### 🧵 Theme Identification
 
-## API Endpoints
+1. Analyze semantic relations across chunks
+2. Use prompt engineering for clarity
+3. Parse and structure LLM output
+4. Display themes with citations
 
-- `POST /api/v1/upload`: Upload a PDF document
-- `GET /api/v1/documents`: List all documents
-- `DELETE /api/v1/delete/{doc_id}`: Delete a specific document
-- `DELETE /api/v1/delete`: Delete all documents
-- `POST /api/v1/query`: Query documents with natural language
+---
 
-## Technologies Used
+## 📡 API Endpoints
 
-- **FastAPI**: Backend web framework
-- **Streamlit**: Frontend web interface
-- **ChromaDB**: Vector database for semantic search
-- **Langchain**: Framework for LLM applications
-- **Google Generative AI**: LLM and embedding models
-- **PDFPlumber**: PDF text extraction
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/v1/upload` | Upload a new document |
+| `GET`  | `/api/v1/documents` | List all uploaded documents |
+| `DELETE` | `/api/v1/delete/{doc_id}` | Delete a specific document |
+| `DELETE` | `/api/v1/delete` | Delete all documents |
+| `POST` | `/api/v1/query` | Submit a question/query |
 
-## Challenges Faced
+---
 
-- **Gemma API Limitations**: The Gemma API has certain rate limits and token constraints that affected the ability to provide detailed individual responses for each document
-- **Context Window Limitations**: Working with large documents required careful chunking to fit within LLM context windows
-- **Parsing Structured Outputs**: Extracting structured theme data from LLM responses required robust regex parsing
-- **Vector Database Optimization**: Tuning ChromaDB for optimal semantic search performance was challenging
-- **Error Handling**: Managing various failure modes in the document processing pipeline required comprehensive error handling
-- **Scalability**: The system's scalability was limited by the API's rate limits and the need for fine-tuned chunking and embedding models
-- **Hosting**: Hosting the system on free-tier services was not feasible due to the storage of uploaded PDFs
+## 🧰 Technologies Used
 
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Streamlit](https://streamlit.io/)
+- [ChromaDB](https://www.trychroma.com/)
+- [LangChain](https://www.langchain.com/)
+- [Google Generative AI](https://ai.google.dev/)
+- [PDFPlumber](https://github.com/jsvine/pdfplumber)
+
+---
+
+## ⚠️ Challenges Faced
+
+| **Challenge**                    | **Impact**                                     | **Solution / Workaround**                                      |
+|----------------------------------|------------------------------------------------|-----------------------------------------------------------------|
+| **API rate/context limits**      | Incomplete or truncated LLM responses          | Optimized prompts, used chunk filtering, and added retry logic |
+| **Large document chunking**      | Lost important context in LLM responses        | Overlapping chunk strategy and top-k semantic search           |
+| **Unstructured LLM output**      | Difficulties in parsing themes and answers     | Used prompt engineering and regex-based structured parsing     |
+| **Vector search inefficiency**   | Slow semantic search with large datasets       | Metadata filtering, indexing tuning, and top-k result limits   |
+| **Pipeline errors**              | System breaks on failed uploads or extractions| Robust exception handling, logging, and status tracking        |
+| **Scalability constraints**      | Cannot support many users or large datasets    | Recommended local use; scalable with cloud infra if needed     |
+| **Hosting limitations**          | Loss of uploaded files on free-tier platforms  | Local deployment or cloud services with persistent storage     |
+| **Poor user experience (UX)**    | Users unsure if system is working or stuck     | UI status updates, progress indicators, and source citations   |
+
+---
+
+## 🧑‍💻 Author
+
+- [@01Phenom](https://github.com/01Phenom)
+
+---
+
+Feel free to fork, use, or extend this project. Contributions and suggestions are welcome!
